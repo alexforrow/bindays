@@ -113,7 +113,7 @@ def find_waste_information(bin_page):
     return {
         'schedule': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[1].get_text(),
-        'next_collections': [parse(li.span.get_text()).isoformat()
+        'next_collections': [parse(li.span.get_text().partition('(')[0]).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
@@ -130,7 +130,7 @@ def find_recycling_information(bin_page):
         'schedule': waste_table.find_all('strong')[1].get_text(),
         'week_colour': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[2].get_text(),
-        'next_collections': [parse(li.span.get_text()).isoformat()
+        'next_collections': [parse(li.span.get_text().partition('(')[0]).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
@@ -147,7 +147,7 @@ def find_green_information(bin_page):
         'schedule': waste_table.find_all('strong')[1].get_text(),
         'week_id': waste_table.find_all('strong')[0].get_text(),
         'day_of_the_week': waste_table.find_all('strong')[2].get_text(),
-        'next_collections': [parse(li.span.get_text()).isoformat()
+        'next_collections': [parse(li.span.get_text().partition('(')[0]).isoformat()
                              for li in waste_table.find_all('li')]
     }
 
