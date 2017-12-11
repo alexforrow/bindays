@@ -143,6 +143,12 @@ def find_green_information(bin_page):
 
     waste_table = soup.find('h2', text='Garden waste collection dates').next_sibling
 
+    if len(waste_table.find_all('strong')) == 0:
+      return {
+        'schedule': 'out_of_season',
+        'next_collections': []
+      }
+
     return {
         'schedule': waste_table.find_all('strong')[1].get_text(),
         'week_id': waste_table.find_all('strong')[0].get_text(),
